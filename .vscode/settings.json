@@ -1,0 +1,9 @@
+{
+	"prettier.useTabs": true,
+	"prettier.arrowParens": "avoid",
+	"trailing-spaces.trimOnSave": true,
+	"trailing-spaces.includeEmptyLines": false,
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"editor.formatOnSave": true,
+	"editor.formatOnPaste": true
+}
