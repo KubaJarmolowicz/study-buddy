@@ -1,13 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "index.css";
-import App from "views/App";
-
-const data = ["yo"];
+import Root from "views/Root";
 
 ReactDOM.render(
 	<React.StrictMode>
-		<App />
+		<Root />
 	</React.StrictMode>,
 	document.getElementById("root")
 );
