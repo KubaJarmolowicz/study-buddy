@@ -1,23 +1,14 @@
 import { users } from "data/users";
-import PropTypes from "prop-types";
+import UsersListItem from "components/UsersListItem/UsersListItem";
 
 const UsersList = () => (
 	<div>
 		<ul>
-			{users.map(({ name, average, attendance }) => (
-				<li key={name}>
-					<div>{average}</div>
-					<div>
-						<p>{name}</p>
-						<p>{attendance}</p>
-					</div>
-					<button>X</button>
-				</li>
+			{users.map(userData => (
+				<UsersListItem userData={userData} />
 			))}
 		</ul>
 	</div>
 );
-
-UsersList.propTypes = {};
 
 export default UsersList;
