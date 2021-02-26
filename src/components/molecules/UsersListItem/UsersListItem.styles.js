@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.li`
-	padding: 1rem 2rem;
+	padding: 2rem 1rem;
 	display: flex;
 	align-items: center;
 	position: relative;
