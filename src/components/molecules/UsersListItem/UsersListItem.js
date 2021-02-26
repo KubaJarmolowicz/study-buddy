@@ -5,11 +5,18 @@ import { Wrapper } from "./UsersListItem.styles";
 import NameAttendance from "components/atoms/NameAverage/NameAttendance";
 import Average from "components/atoms/Average/Average";
 
-const UsersListItem = ({ userData: { name, average, attendance = "0%" } }) => (
+const UsersListItem = ({
+	deleteUser,
+	userData: { name, average, attendance = "0%" },
+}) => (
 	<Wrapper key={name}>
 		<Average average={average} />
 		<NameAttendance name={name} attendance={attendance} />
-		<Button />
+		<Button
+			onClick={() => {
+				deleteUser(name);
+			}}
+		/>
 	</Wrapper>
 );
 
