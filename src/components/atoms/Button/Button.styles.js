@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const StyledButton = styled.button`
-	width: 2rem;
-	height: 2rem;
+	width: 1.5rem;
+	height: 1.5rem;
 	color: ${({ theme }) => theme.colors.white};
 	border: none;
 	background-color: ${({ theme }) => theme.colors.grey};
@@ -10,6 +10,7 @@ export const StyledButton = styled.button`
 	display: flex;
 	justify-content: center;
 	align-items: flex-start;
+	align-self: flex-start;
 
 	svg {
 		height: 100%;
