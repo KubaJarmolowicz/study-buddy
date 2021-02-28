@@ -1,21 +1,13 @@
-import React, { useState } from "react";
-import { users } from "data/users";
+import React from "react";
 import UsersListItem from "components/molecules/UsersListItem/UsersListItem";
 import { StyledList, Wrapper, StyledTitle } from "./UsersList.styles";
 
-const UsersList = () => {
-	const [addedUsers, setAddedUsers] = useState([...users]);
-
-	const deleteUser = name => {
-		const filteredUsers = addedUsers.filter(user => user.name !== name);
-		setAddedUsers(filteredUsers);
-	};
-
+const UsersList = ({ users, deleteUser }) => {
 	return (
 		<Wrapper>
 			<StyledTitle>Students List</StyledTitle>
 			<StyledList>
-				{addedUsers.map(userData => (
+				{users.map(userData => (
 					<UsersListItem
 						key={userData.name}
 						userData={userData}

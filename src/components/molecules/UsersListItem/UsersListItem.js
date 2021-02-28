@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Button from "components/atoms/Button/Button";
+import DeleteButton from "components/atoms/DeleteButton/DeleteButton";
 import { StyledNameAttendance, Wrapper } from "./UsersListItem.styles";
 import Average from "components/atoms/Average/Average";
 
@@ -14,7 +14,7 @@ const UsersListItem = ({
 			<p>{name}</p>
 			<p>attendance: {attendance}</p>
 		</StyledNameAttendance>
-		<Button
+		<DeleteButton
 			onClick={() => {
 				deleteUser(name);
 			}}

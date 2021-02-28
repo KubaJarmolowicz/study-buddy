@@ -1,23 +1,12 @@
 import styled from "styled-components";
 
-export const StyledButton = styled.button`
-	width: 1.5rem;
-	height: 1.5rem;
-	color: ${({ theme }) => theme.colors.white};
+export const Button = styled.button`
+	margin: 15px 0;
+	padding: 7px 20px;
+	font-size: ${({ theme }) => theme.fontSize.s};
+	font-weight: bold;
+	color: ${({ theme }) => theme.colors.darkGrey};
+	background-color: ${({ theme }) => theme.colors.lightPurple};
+	border-radius: 20px;
 	border: none;
-	background-color: ${({ theme }) => theme.colors.grey};
-	border-radius: 50%;
-	display: flex;
-	justify-content: center;
-	align-items: flex-start;
-	align-self: flex-start;
-
-	svg {
-		height: 100%;
-		width: 100%;
-	}
-
-	&:hover {
-		cursor: pointer;
-	}
 `;
