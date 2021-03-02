@@ -17,5 +17,10 @@ body{
 
 a, button{
    font-family: 'Montserrat', sans-serif;
+   text-decoration: none;
+}
+
+a:visited{
+    color: currentColor;
 }
 `;
