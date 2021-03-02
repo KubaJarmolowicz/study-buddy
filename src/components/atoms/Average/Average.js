@@ -1,5 +1,6 @@
 import React from "react";
 import { Wrapper } from "./Average.styles";
+import PropTypes from "prop-types";
 
 const pickBgColor = (average, theme) => {
 	if (average < 3) {
@@ -17,5 +18,9 @@ const Average = ({ average }) => (
 		{average}
 	</Wrapper>
 );
+
+Average.propTypes = {
+	average: PropTypes.number.isRequired,
+};
 
 export default Average;

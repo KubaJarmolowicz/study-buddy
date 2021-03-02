@@ -1,39 +1,45 @@
 import React from "react";
-import {
-	Wrapper,
-	StyledTitle,
-} from "components/organisms/UsersList/UsersList.styles";
+import PropTypes from "prop-types";
 import FormField from "components/molecules/FormField/FormField";
 import { Button } from "components/atoms/Button/Button.styles";
+import { UserShape } from "types";
+import { ViewWrapper } from "components/molecules/ViewWrapper/ViewWrapper";
+import { Title } from "components/atoms/Title/Title";
 
-const Form = ({ handleAddUser, formValues, handleInputChange }) => {
+const AddUser = ({ handleAddUser, formValues, handleInputChange }) => {
 	return (
-		<Wrapper as="form" onSubmit={handleAddUser}>
-			<StyledTitle>Add new student</StyledTitle>
+		<ViewWrapper as="form" onSubmit={handleAddUser}>
+			<Title>Add new student</Title>
 			<FormField
 				label="Name"
 				id="name"
 				name="name"
 				value={formValues.name}
 				onChange={handleInputChange}
-			></FormField>
+			/>
 			<FormField
 				label="Attendance"
 				id="attendance"
 				name="attendance"
 				value={formValues.attendance}
 				onChange={handleInputChange}
-			></FormField>
+			/>
 			<FormField
 				label="Average"
 				id="average"
 				name="average"
 				value={formValues.average}
 				onChange={handleInputChange}
-			></FormField>
+			/>
 			<Button type="submit">Add</Button>
-		</Wrapper>
+		</ViewWrapper>
 	);
 };
 
-export default Form;
+AddUser.propTypes = {
+	handleAddUser: PropTypes.func.isRequired,
+	formValues: PropTypes.shape(UserShape),
+	handleInputChange: PropTypes.func.isRequired,
+};
+
+export default AddUser;
