@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { users as usersData } from "data/users";
+import React from "react";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "assets/styles/GlobalStyle";
 import { theme } from "assets/styles/theme";
@@ -8,48 +7,26 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import MainTemplate from "components/templates/MainTemplate/MainTemplate";
 import Dashboard from "./Dashboard";
 import AddUser from "./AddUser";
-
-export const UsersContext = React.createContext({
-	users: [],
-	deleteUser: () => {},
-	handleAddUser: () => {},
-});
+import UsersProvider from "providers/UsersProvider";
 
 const Root = () => {
-	const [users, setUsers] = useState([...usersData]);
-
-	const deleteUser = name => {
-		const filteredUsers = users.filter(user => user.name !== name);
-		setUsers(filteredUsers);
-	};
-
-	const handleAddUser = formValues => {
-		const newUser = {
-			name: formValues.name,
-			attendance: formValues.attendance,
-			average: formValues.average,
-		};
-
-		setUsers([newUser, ...users]);
-	};
-
 	return (
 		<Router>
 			<ThemeProvider theme={theme}>
 				<GlobalStyle />
 				<MainTemplate>
-					<UsersContext.Provider value={{ users, deleteUser, handleAddUser }}>
+					<UsersProvider>
 						<Wrapper>
 							<Switch>
 								<Route path="/" exact>
-									<Dashboard deleteUser={deleteUser} users={users} />
+									<Dashboard />
 								</Route>
 								<Route path="/add-user">
 									<AddUser />
 								</Route>
 							</Switch>
 						</Wrapper>
-					</UsersContext.Provider>
+					</UsersProvider>
 				</MainTemplate>
 			</ThemeProvider>
 		</Router>
