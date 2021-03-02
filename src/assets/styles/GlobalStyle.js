@@ -20,7 +20,5 @@ a, button{
    text-decoration: none;
 }
 
-a:visited{
-    color: currentColor;
-}
+
 `;

@@ -15,10 +15,10 @@ const Navigation = () => {
 					Buddy
 				</h1>
 			</Logo>
-			<StyledLink to="/">Dashboard</StyledLink>
+			<StyledLink to="/" exact>
+				Dashboard
+			</StyledLink>
 			<StyledLink to="/add-user">Add user</StyledLink>
-			<StyledLink to="/">Settings</StyledLink>
-			<StyledLink to="/">Logout</StyledLink>
 		</Wrapper>
 	);
 };

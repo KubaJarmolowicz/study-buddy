@@ -3,10 +3,11 @@ import { Wrapper } from "./Average.styles";
 import PropTypes from "prop-types";
 
 const pickBgColor = (average, theme) => {
-	if (average < 3) {
+	const averageAsNumber = parseFloat(average);
+	if (averageAsNumber < 3) {
 		return theme.colors.error;
 	}
-	if (average < 4) {
+	if (averageAsNumber < 4) {
 		return theme.colors.warning;
 	}
 
@@ -20,7 +21,7 @@ const Average = ({ average }) => (
 );
 
 Average.propTypes = {
-	average: PropTypes.number.isRequired,
+	average: PropTypes.string.isRequired,
 };
 
 export default Average;
