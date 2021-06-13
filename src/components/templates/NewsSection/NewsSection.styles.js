@@ -41,3 +41,17 @@ export const TitleWrapper = styled.div`
 		font-size: ${({ theme }) => theme.fontSize.m};
 	}
 `;
+
+export const ContentWrapper = styled.div`
+	display: flow-root;
+	img {
+		display: block;
+		max-width: 170px;
+		max-height: 170px;
+		float: right;
+		margin-left: 5px;
+		margin-bottom: 3px;
+		margin-top: 20px;
+		object-fit: cover;
+	}
+`;
