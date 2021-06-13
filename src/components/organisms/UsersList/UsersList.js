@@ -20,7 +20,6 @@ const UsersList = ({ users }) => {
 
 UsersList.propTypes = {
 	users: PropTypes.arrayOf(PropTypes.shape(UserShape)),
-	deleteUser: PropTypes.func.isRequired,
 };
 
 export default UsersList;
