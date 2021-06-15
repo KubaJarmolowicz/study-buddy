@@ -9,9 +9,9 @@ import {
 import { Button } from "components/atoms/Button/Button.styles";
 import axios from "axios";
 
-const URL = "https://graphql.datocms.com/";
+export const URL = "https://graphql.datocms.com/";
 
-const query = `{
+export const query = `{
   allArticles {
     id
     title
@@ -29,7 +29,6 @@ const NewsSection = () => {
 	const [error, setError] = useState("");
 
 	useEffect(() => {
-		console.log(process.env.REACT_APP_DATOCMS_TOKEN);
 		axios
 			.post(
 				URL,
