@@ -43,7 +43,6 @@ const NewsSection = () => {
 			)
 			.then(({ data: { data } }) => data)
 			.then(({ allArticles }) => {
-				console.log(allArticles);
 				setArticles(allArticles);
 			})
 			.catch(() => setError("Sorry, we couldn't load the articles for you :("));
