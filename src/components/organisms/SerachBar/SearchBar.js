@@ -34,7 +34,7 @@ const SearchBar = () => {
 	}, [researchedStudent]);
 
 	return (
-		<SearchbarWrapper>
+		<SearchbarWrapper items={matchingStudents}>
 			<StatusInfo>
 				<p>Logged as:</p>
 				<p>

@@ -12,11 +12,19 @@ export const SearchbarWrapper = styled.div`
 
 	${Input} {
 		font-size: ${({ theme }) => theme.fontSize.xl};
-		padding: 20px;
+		padding: 10px 20px;
 		color: ${({ theme }) => theme.colors.darkGrey};
 		width: 100%;
 		max-width: 600px;
 		border: 2px solid ${({ theme }) => theme.colors.lightPurple};
+
+		box-shadow: ${({ items }) =>
+			items.length > 0 ? "none" : "-2px 4px 10px rgba(115, 124, 142, 0.09)"};
+
+		&:focus {
+			box-shadow: ${({ items }) =>
+				items.length > 0 ? "none" : "-2px 4px 10px rgba(115, 124, 142, 0.3)"};
+		}
 	}
 `;
 
