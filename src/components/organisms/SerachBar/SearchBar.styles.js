@@ -14,9 +14,14 @@ export const SearchbarWrapper = styled.div`
 		font-size: ${({ theme }) => theme.fontSize.xl};
 		color: ${({ theme }) => theme.colors.darkGrey};
 		width: 100%;
-		max-width: 350px;
+		max-width: 700px;
 		border: 2px solid ${({ theme }) => theme.colors.lightPurple};
 	}
+`;
+
+export const ActionAreaWrapper = styled.div`
+	position: relative;
+	width: 100%;
 `;
 
 export const StatusInfo = styled.div`

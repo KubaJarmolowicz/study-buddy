@@ -1,6 +1,11 @@
 import React from "react";
-import { SearchbarWrapper, StatusInfo } from "./SearchBar.styles";
+import {
+	SearchbarWrapper,
+	StatusInfo,
+	ActionAreaWrapper,
+} from "./SearchBar.styles";
 import { Input } from "components/atoms/Input/Input.styles";
+import ResultList from "./ResultList";
 
 const SearchBar = () => {
 	return (
@@ -11,7 +16,10 @@ const SearchBar = () => {
 					<strong>Teacher</strong>
 				</p>
 			</StatusInfo>
-			<Input />
+			<ActionAreaWrapper>
+				<Input />
+				<ResultList />
+			</ActionAreaWrapper>
 		</SearchbarWrapper>
 	);
 };

@@ -3,7 +3,7 @@ import axios from "axios";
 import { ViewWrapper } from "components/molecules/ViewWrapper/ViewWrapper";
 import UsersList from "components/organisms/UsersList/UsersList";
 import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
+import GroupNavigation from "components/organisms/GroupNavigation/GroupNavigation";
 
 const Dashboard = () => {
 	const [students, setStudents] = useState([]);
@@ -25,17 +25,11 @@ const Dashboard = () => {
 	}, [id, groups]);
 
 	return (
-		<ViewWrapper>
-			<nav>
-				{groups.map(group => (
-					<Link to={`/group/${group}`} key={group}>
-						{" "}
-						{group}{" "}
-					</Link>
-				))}
-			</nav>
-			<UsersList users={students} />
-		</ViewWrapper>
+		<GroupNavigation groups={groups} currentGroup={id ?? groups[0]}>
+			<ViewWrapper>
+				<UsersList users={students} />
+			</ViewWrapper>
+		</GroupNavigation>
 	);
 };
 
