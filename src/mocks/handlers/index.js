@@ -11,6 +11,23 @@ export const handlers = [
 			})
 		);
 	}),
+
+	rest.post("/students", (req, res, ctx) => {
+		if (req.body.researchedStudent) {
+			const requestedStudents = students.filter(student => {
+				const [firstName, lastName] = student.name.split(" ");
+				return (
+					firstName
+						.toLowerCase()
+						.startsWith(req.body.researchedStudent.toLowerCase()) ||
+					lastName
+						.toLowerCase()
+						.startsWith(req.body.researchedStudent.toLowerCase())
+				);
+			});
+			return res(ctx.status(200), ctx.json({ data: requestedStudents }));
+		}
+	}),
 	rest.get("/students/:group", (req, res, ctx) => {
 		if (req.params.group) {
 			const requestedStudents = students.filter(

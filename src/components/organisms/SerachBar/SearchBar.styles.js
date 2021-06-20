@@ -14,7 +14,7 @@ export const SearchbarWrapper = styled.div`
 		font-size: ${({ theme }) => theme.fontSize.xl};
 		color: ${({ theme }) => theme.colors.darkGrey};
 		width: 100%;
-		max-width: 700px;
+		max-width: 600px;
 		border: 2px solid ${({ theme }) => theme.colors.lightPurple};
 	}
 `;
@@ -28,8 +28,9 @@ export const StatusInfo = styled.div`
 	color: ${({ theme }) => theme.colors.darkGrey};
 	font-size: ${({ theme }) => theme.fontSize.l};
 	margin-right: 40px;
-
+	min-width: 100px;
 	p {
+		width: 100%;
 		margin: 5px;
 	}
 `;

@@ -1,9 +1,8 @@
 import styled from "styled-components";
 
 export const StyledResultList = styled.ul`
-	//font-weightborder: 1px solid red;
 	display: ${({ items }) => (items.length > 0 ? "block" : "none")};
-	max-width: 700px;
+	max-width: 600px;
 	width: 100%;
 	position: absolute;
 	left: 0;
@@ -15,6 +14,7 @@ export const StyledResultList = styled.ul`
 	background-color: white;
 	padding: 1rem;
 	z-index: 10;
+
 	li {
 		list-style: none;
 		font-size: ${({ theme }) => theme.fontSize.xl};

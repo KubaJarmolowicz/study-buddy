@@ -2,15 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { StyledResultList } from "./ResultList.styles";
 
-const ResultList = ({
-	items = [
-		"Kuba Jarmołowicz",
-		"Kuba Jarmołowicz",
-		"Kuba Jarmołowicz",
-		"Kuba Jarmołowicz",
-		"Kuba Jarmołowicz",
-	],
-}) => {
+const ResultList = ({ items = [] }) => {
 	return (
 		<StyledResultList items={items}>
 			{items.map(item => (
@@ -21,7 +13,7 @@ const ResultList = ({
 };
 
 ResultList.propTypes = {
-	items: PropTypes.array,
+	items: PropTypes.arrayOf(PropTypes.string),
 };
 
 export default ResultList;
