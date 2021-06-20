@@ -12,6 +12,7 @@ export const SearchbarWrapper = styled.div`
 
 	${Input} {
 		font-size: ${({ theme }) => theme.fontSize.xl};
+		padding: 20px;
 		color: ${({ theme }) => theme.colors.darkGrey};
 		width: 100%;
 		max-width: 600px;

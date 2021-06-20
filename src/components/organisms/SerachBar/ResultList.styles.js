@@ -15,6 +15,28 @@ export const StyledResultList = styled.ul`
 	padding: 1rem;
 	z-index: 10;
 
+	&::before {
+		content: "";
+		width: 20px;
+		height: 80px;
+		background-color: white;
+		position: absolute;
+		top: -40px;
+		left: 0;
+		border-radius: 10px;
+	}
+
+	&::after {
+		content: "";
+		width: 20px;
+		height: 80px;
+		background-color: white;
+		position: absolute;
+		top: -40px;
+		right: 1px;
+		border-radius: 10px;
+	}
+
 	li {
 		list-style: none;
 		font-size: ${({ theme }) => theme.fontSize.xl};
