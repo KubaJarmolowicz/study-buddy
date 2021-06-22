@@ -1,6 +1,5 @@
 import React from "react";
-import { screen } from "@testing-library/react";
-import { renderWithProviders } from "helpers/renderWithProviders";
+import { render, screen } from "test-utils";
 import MockAdapter from "axios-mock-adapter";
 import axios from "axios";
 import NewsSection from "./NewsSection";
@@ -16,7 +15,7 @@ describe("News Section tests", () => {
 	it("Displays the error message when articles are not loaded", async () => {
 		mock.onPost(URL, { query }).reply(500);
 
-		renderWithProviders(<NewsSection />);
+		render(<NewsSection />);
 
 		await screen.findByText(/Sorry/);
 	});
@@ -26,7 +25,7 @@ describe("News Section tests", () => {
 			data: { allArticles: [{ id: "1", title: "Test", content: "Test" }] },
 		});
 
-		renderWithProviders(<NewsSection />);
+		render(<NewsSection />);
 
 		await screen.findAllByText(/Test/);
 	});
@@ -36,7 +35,7 @@ describe("News Section tests", () => {
 			data: { allArticles: [{ id: "1", title: "Test", content: "Test" }] },
 		});
 
-		renderWithProviders(<NewsSection />);
+		render(<NewsSection />);
 
 		screen.getByText(/Loading/);
 	});
@@ -44,7 +43,7 @@ describe("News Section tests", () => {
 	it("Displays loading message and then error message if server does not respond", async () => {
 		mock.onPost(URL, { query }).reply(500);
 
-		renderWithProviders(<NewsSection />);
+		render(<NewsSection />);
 
 		const loadingMsg = screen.queryByText(/Loading/);
 

@@ -33,6 +33,7 @@ export const SearchWrapper = styled.div`
 `;
 
 export const SearchResults = styled.ul`
+  visibility: ${({isVisible})=> isVisible ? "visible" : "hidden"};
   z-index: 1000;
   max-height: 500px;
   overflow-y: scroll;
@@ -47,20 +48,23 @@ export const SearchResults = styled.ul`
   flex-direction: column;
   background-color: ${({ theme }) => theme.colors.white};
 
-  li {
+  
+`;
+
+
+export const SearchResultsItem = styled.li`
+
     font-weight: bold;
     color: ${({ theme }) => theme.colors.darkGrey};
-    background-color: ${({ theme }) => theme.colors.white};
+    background-color: ${({ theme, isHighlighted }) => isHighlighted ? theme.colors.lightPurple : theme.colors.white};
     width: 100%;
     padding: 20px 5px;
-  }
+  
 
-  li:hover,
-  li:focus {
+ &:hover {
     background-color: ${({ theme }) => theme.colors.lightPurple};
   }
 
-  li:not(:last-child) {
+ &:not(:last-child) {
     border-bottom: 1px solid ${({ theme }) => theme.colors.darkPurple};
-  }
-`;
+  }`;
