@@ -11,7 +11,6 @@ import {
 } from "react-router-dom";
 import MainTemplate from "components/templates/MainTemplate/MainTemplate";
 import Dashboard from "./Dashboard";
-import AddUser from "./AddUser";
 
 const Root = () => {
 	return (

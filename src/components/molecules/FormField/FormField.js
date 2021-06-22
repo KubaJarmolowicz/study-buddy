@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Label } from "components/atoms/Label/Label.styles";
-import { Input } from "components/atoms/Input/Input.styles";
+import { Input } from "components/atoms/Input/Input";
 import { Wrapper } from "./FormField.styles";
 
 const FormField = React.forwardRef(

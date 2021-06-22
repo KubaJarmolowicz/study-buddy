@@ -1,52 +1,42 @@
-import React, { useState, useEffect } from "react";
-import {
-	SearchbarWrapper,
-	StatusInfo,
-	ActionAreaWrapper,
-} from "./SearchBar.styles";
-import { Input } from "components/atoms/Input/Input.styles";
-import ResultList from "./ResultList";
-import axios from "axios";
-import _ from "lodash";
+import { Input } from 'components/atoms/Input/Input';
+import React, { useState, useEffect } from 'react';
+import debounce from 'lodash/debounce';
+import { SearchBarWrapper, SearchResults, SearchWrapper, StatusInfo } from 'components/organisms/SerachBar/SearchBar.styles';
+import { useStudents } from 'hooks/useStudents';
 
-const SearchBar = () => {
-	const [researchedStudent, setResearchedStudent] = useState("");
-	const [matchingStudents, setMatchingStudents] = useState([]);
+export const SearchBar = () => {
+  const [searchPhrase, setSearchPhrase] = useState('');
+  const [matchingStudents, setMatchingStudents] = useState('');
+  const { findStudents } = useStudents();
 
-	const onChangeHandler = event => {
-		setResearchedStudent(event.target.value);
-	};
+  const getMatchingStudents = debounce(async (e) => {
+    const { students } = await findStudents(searchPhrase);
+    setMatchingStudents(students);
+  }, 500);
 
-	const debouncedOnChangeHandler = _.debounce(onChangeHandler, 300);
+  useEffect(() => {
+    if (!searchPhrase) return;
+    getMatchingStudents(searchPhrase);
+  }, [searchPhrase, getMatchingStudents]);
 
-	useEffect(() => {
-		if (researchedStudent) {
-			axios
-				.post("/students", { researchedStudent })
-				.then(({ data: { data } }) => {
-					const names = data.map(student => student.name);
-					setMatchingStudents(names);
-				})
-				.catch(err => console.log(err));
-		} else {
-			setMatchingStudents([]);
-		}
-	}, [researchedStudent]);
-
-	return (
-		<SearchbarWrapper items={matchingStudents}>
-			<StatusInfo>
-				<p>Logged as:</p>
-				<p>
-					<strong>Teacher</strong>
-				</p>
-			</StatusInfo>
-			<ActionAreaWrapper>
-				<Input onChange={debouncedOnChangeHandler} />
-				<ResultList items={matchingStudents} />
-			</ActionAreaWrapper>
-		</SearchbarWrapper>
-	);
+  return (
+    <SearchBarWrapper>
+      <StatusInfo>
+        <p>Logged as:</p>
+        <p>
+          <strong>Teacher</strong>
+        </p>
+      </StatusInfo>
+      <SearchWrapper>
+        <Input onChange={(e) => setSearchPhrase(e.target.value)} value={searchPhrase} name="Search" id="Search" />
+        {searchPhrase && matchingStudents.length ? (
+          <SearchResults>
+            {matchingStudents.map((student) => (
+              <li key={student.id}>{student.name}</li>
+            ))}
+          </SearchResults>
+        ) : null}
+      </SearchWrapper>
+    </SearchBarWrapper>
+  );
 };
-
-export default SearchBar;
