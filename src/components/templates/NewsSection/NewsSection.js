@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Wrapper, NewsSectionHeader } from "./NewsSection.styles";
 import {
@@ -8,7 +8,6 @@ import {
 } from "./NewsSection.styles";
 import { Button } from "components/atoms/Button/Button.styles";
 import axios from "axios";
-import { useElementSize } from "hooks/useElementSize";
 
 export const URL = "https://graphql.datocms.com/";
 
@@ -29,13 +28,6 @@ const NewsSection = () => {
 	const [articles, setArticles] = useState([]);
 	const [error, setError] = useState("");
 
-	const ref = useRef(null);
-
-	const { width, height } = useElementSize(ref);
-
-	useEffect(() => {
-		console.log(width, height);
-	}, [width, height]);
 
 	useEffect(() => {
 		axios
@@ -58,7 +50,7 @@ const NewsSection = () => {
 	}, []);
 
 	return (
-		<Wrapper ref={ref}>
+		<Wrapper>
 			<NewsSectionHeader>University news feed</NewsSectionHeader>
 			{articles.length > 0 ? (
 				articles.map(({ id, title, category, content, image = null }) => {

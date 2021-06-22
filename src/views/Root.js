@@ -27,9 +27,6 @@ const Root = () => {
 							<Route path="/group/:id?">
 								<Dashboard />
 							</Route>
-							<Route path="/add-user">
-								<AddUser />
-							</Route>
 						</Switch>
 					</Wrapper>
 				</MainTemplate>
