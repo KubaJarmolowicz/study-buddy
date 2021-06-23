@@ -15,7 +15,7 @@ body{
     font-family: 'Montserrat', sans-serif;
 }
 
-a, button{
+a, button {
    font-family: 'Montserrat', sans-serif;
    text-decoration: none;
 }

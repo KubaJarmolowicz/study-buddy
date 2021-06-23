@@ -6,7 +6,7 @@ import {
 	TitleWrapper,
 	ContentWrapper,
 } from "./NewsSection.styles";
-import { Button } from "components/atoms/Button/Button.styles";
+import { Button } from "components/atoms/Button/Button";
 import axios from "axios";
 
 export const URL = "https://graphql.datocms.com/";
@@ -27,7 +27,6 @@ export const query = `{
 const NewsSection = () => {
 	const [articles, setArticles] = useState([]);
 	const [error, setError] = useState("");
-
 
 	useEffect(() => {
 		axios
