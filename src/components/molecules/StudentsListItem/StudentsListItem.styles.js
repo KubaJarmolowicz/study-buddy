@@ -13,6 +13,10 @@ export const Wrapper = styled.li`
 		height: 1px;
 		background-color: lightgrey;
 	}
+
+	&:hover {
+		cursor: pointer;
+	}
 `;
 
 export const StyledAverage = styled.div`
