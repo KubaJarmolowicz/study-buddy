@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
 import { Button } from "components/atoms/Button/Button";
-import { ModalWrapper } from "./Modal.styles";
+import { ModalWrapper, ModalOverlay } from "./Modal.styles";
 
 const modalContainer = document.getElementById("modal-container");
 
@@ -16,10 +16,13 @@ const Modal = ({ handleClose, children }) => {
 	}, [modalNode]);
 
 	return ReactDOM.createPortal(
-		<ModalWrapper>
-			{children}
-			<Button onClick={handleClose}>Close</Button>
-		</ModalWrapper>,
+		<>
+			<ModalWrapper>
+				{children}
+				<Button onClick={handleClose}>Close</Button>
+			</ModalWrapper>
+			<ModalOverlay onClick={handleClose} />
+		</>,
 		modalNode
 	);
 };

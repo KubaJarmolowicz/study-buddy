@@ -15,4 +15,16 @@ export const ModalWrapper = styled.div`
 	justify-content: space-between;
 	align-items: center;
 	padding: 50px;
+	z-index: 10;
+`;
+
+export const ModalOverlay = styled.div`
+	position: absolute;
+	width: 100vw;
+	height: 100vh;
+	background-color: rgba(0, 0, 0, 0.2);
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 5;
 `;
