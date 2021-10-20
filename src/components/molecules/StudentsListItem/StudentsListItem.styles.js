@@ -37,6 +37,12 @@ export const StyledAverage = styled.div`
 	}};
 `;
 
+export const BigAverage = styled(StyledAverage)`
+	width: 70px;
+	height: 70px;
+	font-size: ${({ theme }) => theme.fontSize.l};
+`;
+
 export const StyledInfo = styled.div`
 	padding: 25px 20px;
 

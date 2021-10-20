@@ -19,7 +19,9 @@ const Modal = ({ handleClose, children }) => {
 		<>
 			<ModalWrapper>
 				{children}
-				<Button onClick={handleClose}>Close</Button>
+				<Button isBig onClick={handleClose}>
+					Close
+				</Button>
 			</ModalWrapper>
 			<ModalOverlay onClick={handleClose} />
 		</>,
