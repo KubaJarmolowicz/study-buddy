@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
+import { useError } from "./useError";
 
 export const AuthContext = React.createContext({
   user: {},
@@ -9,6 +10,8 @@ export const AuthContext = React.createContext({
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+
+  const { dispatchError } = useError();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -22,7 +25,7 @@ export const AuthProvider = ({ children }) => {
           });
           setUser(me.data);
         } catch (e) {
-          console.log(e);
+          dispatchError();
         }
       })();
     }
@@ -38,7 +41,7 @@ export const AuthProvider = ({ children }) => {
       setUser(response.data);
       localStorage.setItem("token", response.data.token);
     } catch (e) {
-      console.log(e);
+      dispatchError("Please provide a valid username and password");
     }
   };
 

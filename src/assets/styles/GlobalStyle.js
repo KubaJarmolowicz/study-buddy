@@ -13,6 +13,7 @@ html{
 
 body{
     font-family: 'Montserrat', sans-serif;
+    overflow-y: hidden;
 }
 
 a, button {

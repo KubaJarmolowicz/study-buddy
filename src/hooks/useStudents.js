@@ -1,5 +1,6 @@
 import { useCallback } from "react";
 import axios from "axios";
+import { useError } from "hooks/useError";
 
 const studentsApi = axios.create({});
 
@@ -18,12 +19,14 @@ studentsApi.interceptors.request.use(
 );
 
 export const useStudents = () => {
+  const { dispatchError } = useError();
+
   const getGroups = useCallback(async () => {
     try {
       const result = await studentsApi.get("/groups");
       return result.data.groups.map(({ id }) => id);
     } catch (e) {
-      console.log(e);
+      dispatchError("Couldn't load groups. Please try again later.");
     }
   }, []);
 
@@ -32,7 +35,7 @@ export const useStudents = () => {
       const result = await studentsApi.get(`/students/${studentId}`);
       return result.data.students;
     } catch (e) {
-      console.log(e);
+      dispatchError("Couldn't fetch students. Please try again later.");
     }
   }, []);
 
@@ -41,7 +44,7 @@ export const useStudents = () => {
       const result = await studentsApi.get(`/groups/${groupId}`);
       return result.data.students;
     } catch (e) {
-      console.log(e);
+      dispatchError("Couldn't fetch students. Please try again later.");
     }
   }, []);
 
@@ -52,7 +55,7 @@ export const useStudents = () => {
       });
       return data;
     } catch (e) {
-      console.log(e);
+      dispatchError("Couldn't fetch students. Please try again later.");
     }
   }, []);
 
