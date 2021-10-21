@@ -4,15 +4,22 @@ import { handlers } from "./handlers";
 
 export const worker = setupWorker(...handlers);
 
-const createStudents = () => {
+const seed = () => {
+	["A", "B", "C"].forEach(groupId => {
+		db.group.create({ id: groupId });
+	});
+
 	for (let i = 0; i < 15; i++) {
 		db.student.create();
+		db.event.create();
 	}
 };
 
-createStudents();
+seed();
 
 window.mocks = {
-	createStudents,
+	seed,
+	getGroups: () => db.group.getAll(),
 	getStudents: () => db.student.getAll(),
+	getEvents: () => db.event.getAll(),
 };
