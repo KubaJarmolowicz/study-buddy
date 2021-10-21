@@ -1,65 +1,51 @@
-import {render, screen, fireEvent} from "test-utils";
-import {setupServer} from "msw/node";
-import { handlers } from "mocks/handlers";
+import { render, screen, fireEvent } from "test-utils";
 import { SearchBar } from "./SearchBar";
 import { waitForElementToBeRemoved } from "@testing-library/react";
 
-const server = setupServer(...handlers);
+describe("Searchbar test suite", () => {
+	it("Renders the component", () => {
+		render(<SearchBar />);
+		screen.getByText("Teacher");
+		screen.getByPlaceholderText("Search");
+	});
 
-describe('Searchbar test suite',()=>{
+	it("Displays users when searchphrase is matching", async () => {
+		render(<SearchBar />);
 
-    beforeAll(()=> server.listen());
-    afterEach(()=> server.resetHandlers());
-    afterAll(()=> server.close())
+		const input = screen.getByPlaceholderText("Search");
 
+		fireEvent.change(input, { target: { value: "Lo" } });
 
-    it('Renders the component', ()=>{
-        render(<SearchBar/>)
-        screen.getByText("Teacher");
-        screen.getByPlaceholderText("Search");
-    })
+		const adam = await screen.findByText(/Lowell/);
 
-    it('Displays users when searchphrase is matching', async ()=>{
-        render(<SearchBar/>)
+		const krysia = screen.queryByText("Krysia");
 
-        const input = screen.getByPlaceholderText("Search");
+		expect(adam).toBeInTheDocument();
+		expect(krysia).not.toBeInTheDocument();
+	});
 
-        fireEvent.change(input, {target: {value: "ad"}});
+	it("Hides the list when searchphrase is removed", async () => {
+		render(<SearchBar />);
 
-        const adam = await screen.findByText("Adam Romański");
-        
-        const krysia = screen.queryByText("Krysia");
+		const input = screen.getByPlaceholderText("Search");
 
-        expect(adam).toBeInTheDocument()
-        expect(krysia).not.toBeInTheDocument()
-       
-    })
+		const searchResults = screen.queryByTestId("search-results");
 
-    
-    it('Hides the list when searchphrase is removed', async ()=>{
-        render(<SearchBar/>)
+		fireEvent.change(input, { target: { value: "Lo" } });
 
-        const input = screen.getByPlaceholderText("Search");
+		expect(searchResults).toBeInTheDocument();
 
-        const searchResults = screen.queryByTestId("search-results");
+		const adam = await screen.findByText(/Lowell/);
 
-        fireEvent.change(input, {target: {value: "ad"}});
+		expect(adam).toBeInTheDocument();
 
-        expect(searchResults).toBeInTheDocument()
+		fireEvent.change(input, { target: { value: "" } });
 
-        const adam = await screen.findByText("Adam Romański");
+		const unwantedAdam = screen.queryByText("Adam Romański");
 
-        expect(adam).toBeInTheDocument()
-
-       fireEvent.change(input, {target: {value: ""}});
-
-       const unwantedAdam = screen.queryByText("Adam Romański");
-
-       // eslint-disable-next-line jest/valid-expect-in-promise
-       waitForElementToBeRemoved(unwantedAdam).then(()=>{
-            expect(searchResults).not.toBeInTheDocument()
-       });
-
-       
-    })
-})
+		// eslint-disable-next-line jest/valid-expect-in-promise
+		waitForElementToBeRemoved(unwantedAdam).then(() => {
+			expect(searchResults).not.toBeInTheDocument();
+		});
+	});
+});
