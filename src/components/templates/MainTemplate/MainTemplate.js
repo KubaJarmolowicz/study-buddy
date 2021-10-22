@@ -1,8 +1,9 @@
 import React from "react";
 import Navigation from "components/organisms/Navigation/Navigation";
 import { Wrapper } from "components/templates/MainTemplate/MainTemplate.styles";
-import {SearchBar} from "components/organisms/SerachBar/SearchBar";
+import { SearchBar } from "components/organisms/SerachBar/SearchBar";
 import NewsSection from "../NewsSection/NewsSection";
+import NotesWidget from "components/organisms/NotesWidget/NotesWidget";
 
 const MainTemplate = ({ children }) => {
 	return (
@@ -11,6 +12,7 @@ const MainTemplate = ({ children }) => {
 			<SearchBar />
 			{children}
 			<NewsSection />
+			<NotesWidget />
 		</Wrapper>
 	);
 };

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const StyledButton = styled.button`
+	cursor: pointer;
 	width: 22px;
 	height: 22px;
 	margin: 0 10px;

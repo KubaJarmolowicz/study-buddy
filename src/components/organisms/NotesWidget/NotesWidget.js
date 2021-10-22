@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Note from "components/molecules/Note/Note";
 import { useSelector } from "react-redux";
 import {
@@ -8,10 +8,10 @@ import {
 } from "components/organisms/NotesWidget/NotesWidget.styles";
 
 const NotesWidget = () => {
-	const [isOpen, setIsOpen] = React.useState(false);
-	const notes = useSelector(state => state.notes);
-
+	const [isOpen, setIsOpen] = useState(false);
 	const handleToggleWidget = () => setIsOpen(prevState => !prevState);
+
+	const notes = useSelector(state => state.notes);
 
 	return (
 		<Wrapper isOpen={isOpen}>
