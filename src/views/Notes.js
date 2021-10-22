@@ -9,7 +9,6 @@ import {
 } from "views/Notes.styles";
 import { useSelector, useDispatch } from "react-redux";
 import { addNote } from "store";
-import { v4 as uuid } from "uuid";
 import { useForm } from "react-hook-form";
 
 const Notes = () => {
@@ -18,7 +17,7 @@ const Notes = () => {
 	const dispatch = useDispatch();
 
 	const handleAddNote = ({ title, content }) => {
-		dispatch(addNote({ id: uuid(), title, content }));
+		dispatch(addNote({ title, content }));
 		reset();
 	};
 
