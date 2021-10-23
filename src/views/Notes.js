@@ -7,17 +7,12 @@ import {
 	StyledFormField,
 	Wrapper,
 } from "views/Notes.styles";
-import { useSelector, useDispatch } from "react-redux";
-import { addNote } from "store";
 import { useForm } from "react-hook-form";
+import { useGetNotesQuery, useAddNoteMutation } from "store";
 
 const Notes = () => {
-	const notes = useSelector(state => state.notes);
-
-	const dispatch = useDispatch();
-
 	const handleAddNote = ({ title, content }) => {
-		dispatch(addNote({ title, content }));
+		addNote({ title, content });
 		reset();
 	};
 
@@ -27,6 +22,13 @@ const Notes = () => {
 		formState: { errors },
 		reset,
 	} = useForm();
+
+	const { data, isLoading } = useGetNotesQuery();
+	const [addNote, addRest] = useAddNoteMutation();
+
+	React.useEffect(() => {
+		console.log(data);
+	}, [data]);
 
 	return (
 		<Wrapper>
@@ -50,15 +52,19 @@ const Notes = () => {
 					<Button type="submit">Add</Button>
 				</form>
 			</FormWrapper>
-			<NotesWrapper>
-				{notes.length ? (
-					notes.map(({ title, content, id }) => (
-						<Note id={id} key={id} title={title} content={content} />
-					))
-				) : (
-					<p>Create your first note</p>
-				)}
-			</NotesWrapper>
+			{isLoading ? (
+				<h2>Loading...</h2>
+			) : (
+				<NotesWrapper>
+					{data.notes.length ? (
+						data.notes.map(({ title, content, id }) => (
+							<Note id={id} key={id} title={title} content={content} />
+						))
+					) : (
+						<p>Create your first note</p>
+					)}
+				</NotesWrapper>
+			)}
 		</Wrapper>
 	);
 };
