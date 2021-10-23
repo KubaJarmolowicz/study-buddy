@@ -8,7 +8,7 @@ import {
 	Wrapper,
 } from "views/Notes.styles";
 import { useForm } from "react-hook-form";
-import { useGetNotesQuery, useAddNoteMutation } from "store";
+import { useGetNotesQuery, useAddNoteMutation } from "store/api/notes";
 
 const Notes = () => {
 	const handleAddNote = ({ title, content }) => {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Redirect, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import StudentsList from "components/organisms/StudentsList/StudentsList";
@@ -8,23 +8,16 @@ import { GroupWrapper, TitleWrapper, Wrapper } from "views/Dashboard.styles";
 import { Title } from "components/atoms/Title/Title";
 import StudentDetails from "components/molecules/StudentDetails/Student.Details";
 import Modal from "components/organisms/Modal/Modal";
+import { useGetGroupsQuery } from "store/api/groups";
 
 const Dashboard = () => {
-	const { getGroups, getStudentById } = useStudents();
+	const { getStudentById } = useStudents();
 	const { id } = useParams();
 
 	const { isModalOpen, handleOpenModal, handleCloseModal } = useModal();
+	const { data, isLoading } = useGetGroupsQuery();
 
-	const [groups, setGroups] = useState([]);
 	const [currentStudent, setCurrentStudent] = useState(null);
-
-	useEffect(() => {
-		(async () => {
-			const groups = await getGroups();
-
-			setGroups(groups);
-		})();
-	}, [getGroups]);
 
 	const handleOpenStudentDetails = async id => {
 		const studentData = await getStudentById(id);
@@ -32,16 +25,25 @@ const Dashboard = () => {
 		handleOpenModal();
 	};
 
-	if (!id && groups.length > 0) return <Redirect to={`/group/${groups[0]}`} />;
+	if (isLoading) {
+		return (
+			<Wrapper>
+				<TitleWrapper>Loading...</TitleWrapper>
+			</Wrapper>
+		);
+	}
+
+	if (!id && data.groups.length > 0)
+		return <Redirect to={`/group/${data.groups[0].id}`} />;
 
 	return (
 		<Wrapper>
 			<TitleWrapper>
 				<Title as="h2">Group {id}</Title>
 				<nav>
-					{groups.map(group => (
-						<Link key={group} to={`/group/${group}`}>
-							{group}{" "}
+					{data.groups.map(({ id }) => (
+						<Link key={id} to={`/group/${id}`}>
+							{id}{" "}
 						</Link>
 					))}
 				</nav>

@@ -5,7 +5,7 @@ import {
 	WidgetHandler,
 	Wrapper,
 } from "components/organisms/NotesWidget/NotesWidget.styles";
-import { useGetNotesQuery } from "store";
+import { useGetNotesQuery } from "store/api/notes";
 
 const NotesWidget = () => {
 	const [isOpen, setIsOpen] = useState(false);
