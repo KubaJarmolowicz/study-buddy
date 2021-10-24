@@ -15,24 +15,35 @@ export const SearchBar = () => {
 	const [searchPhrase, setSearchPhrase] = useState("");
 	const { data, isLoading } = useFindStudentsQuery({ searchPhrase });
 
+	const [selectedStudent, setSelectedStudent] = useState(null);
+
+	const handleSelectedItemChange = ({ selectedItem }) =>
+		setSelectedStudent(selectedItem);
+
 	const getMatchingStudents = debounce(({ inputValue }) => {
 		setSearchPhrase(inputValue);
 	}, 500);
 
 	const {
 		isOpen,
-		selectedItem,
 		getToggleButtonProps,
 		getLabelProps,
 		getMenuProps,
 		getInputProps,
 		getComboboxProps,
 		highlightedIndex,
+		selectedItem,
 		getItemProps,
 	} = useCombobox({
 		items: data?.students ?? [],
+		selectedItem: selectedStudent?.name ?? "",
+		onSelectedItemChange: handleSelectedItemChange,
 		onInputValueChange: getMatchingStudents,
 	});
+
+	// React.useEffect(() => {
+	// 	console.log(selectedItem);
+	// }, [selectedItem]);
 
 	return (
 		<SearchBarWrapper {...getComboboxProps()}>
@@ -59,6 +70,7 @@ export const SearchBar = () => {
 							<SearchResultsItem
 								isHighlighted={highlightedIndex === index}
 								{...getItemProps({ item, index })}
+								selectedItem={selectedItem}
 								key={item.id}
 							>
 								{item.name}
