@@ -9,15 +9,14 @@ import {
 	StatusInfo,
 	SearchResultsItem,
 } from "components/organisms/SerachBar/SearchBar.styles";
-import { useStudents } from "hooks/useStudents";
+import { useFindStudentsQuery } from "store/api/students";
 
 export const SearchBar = () => {
-	const [matchingStudents, setMatchingStudents] = useState([]);
-	const { findStudents } = useStudents();
+	const [searchPhrase, setSearchPhrase] = useState("");
+	const { data, isLoading } = useFindStudentsQuery({ searchPhrase });
 
-	const getMatchingStudents = debounce(async ({ inputValue }) => {
-		const { students } = await findStudents(inputValue);
-		setMatchingStudents(students);
+	const getMatchingStudents = debounce(({ inputValue }) => {
+		setSearchPhrase(inputValue);
 	}, 500);
 
 	const {
@@ -31,7 +30,7 @@ export const SearchBar = () => {
 		highlightedIndex,
 		getItemProps,
 	} = useCombobox({
-		items: matchingStudents,
+		items: data?.students ?? [],
 		onInputValueChange: getMatchingStudents,
 	});
 
@@ -51,12 +50,12 @@ export const SearchBar = () => {
 					placeholder="Search"
 				/>
 				<SearchResults
-					isVisible={isOpen && matchingStudents.length > 0}
+					isVisible={!isLoading && isOpen && data?.students.length > 0}
 					{...getMenuProps()}
 					data-testid="search-results"
 				>
 					{isOpen &&
-						matchingStudents.map((item, index) => (
+						data?.students.map((item, index) => (
 							<SearchResultsItem
 								isHighlighted={highlightedIndex === index}
 								{...getItemProps({ item, index })}

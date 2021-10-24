@@ -2,30 +2,34 @@ import React, { useState } from "react";
 import { Redirect, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import StudentsList from "components/organisms/StudentsList/StudentsList";
-import { useStudents } from "hooks/useStudents";
 import { useModal } from "hooks/useModal";
 import { GroupWrapper, TitleWrapper, Wrapper } from "views/Dashboard.styles";
 import { Title } from "components/atoms/Title/Title";
 import StudentDetails from "components/molecules/StudentDetails/Student.Details";
 import Modal from "components/organisms/Modal/Modal";
 import { useGetGroupsQuery } from "store/api/groups";
+import { useGetStudentByIdQuery } from "store/api/students";
 
 const Dashboard = () => {
-	const { getStudentById } = useStudents();
 	const { id } = useParams();
 
+	const [currentStudentId, setCurrentStudentId] = useState(
+		"318e2aeb-f079-4488-a42c-b158be8365ed"
+	);
+
 	const { isModalOpen, handleOpenModal, handleCloseModal } = useModal();
-	const { data, isLoading } = useGetGroupsQuery();
+	const { data, isLoading: areGroupsLoading } = useGetGroupsQuery();
+	const {
+		data: studentsData,
+		isLoading: isStudentLoading,
+	} = useGetStudentByIdQuery(currentStudentId);
 
-	const [currentStudent, setCurrentStudent] = useState(null);
-
-	const handleOpenStudentDetails = async id => {
-		const studentData = await getStudentById(id);
-		setCurrentStudent(studentData);
+	const handleGetCurrentStudentId = id => {
+		setCurrentStudentId(id);
 		handleOpenModal();
 	};
 
-	if (isLoading) {
+	if (areGroupsLoading) {
 		return (
 			<Wrapper>
 				<TitleWrapper>Loading...</TitleWrapper>
@@ -49,9 +53,13 @@ const Dashboard = () => {
 				</nav>
 			</TitleWrapper>
 			<GroupWrapper>
-				<StudentsList handleOpenStudentDetails={handleOpenStudentDetails} />
+				<StudentsList handleGetCurrentStudentId={handleGetCurrentStudentId} />
 				<Modal isOpen={isModalOpen} handleClose={handleCloseModal}>
-					<StudentDetails student={currentStudent} />
+					{isStudentLoading ? (
+						<h2>Loading...</h2>
+					) : (
+						<StudentDetails student={studentsData?.students} />
+					)}
 				</Modal>
 			</GroupWrapper>
 		</Wrapper>
