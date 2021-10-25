@@ -36,7 +36,6 @@ export const students = [
 	}),
 
 	rest.post("/students/search", (req, res, ctx) => {
-		console.log(req.body);
 		if (req.body.searchPhrase !== "") {
 			const matchingStudents = db.student.findMany({
 				where: {

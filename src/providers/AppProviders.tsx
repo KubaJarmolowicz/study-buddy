@@ -1,4 +1,4 @@
-import React, { ReactChild } from "react";
+import React, { ReactNode } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import { AuthProvider } from "../hooks/useAuth";
 import { ErrorProvider } from "../hooks/useError";
@@ -9,7 +9,7 @@ import { Provider } from "react-redux";
 import { store } from "store";
 
 interface IProviders {
-	children: ReactChild;
+	children: ReactNode;
 }
 
 const AppProviders = ({ children }: IProviders) => {

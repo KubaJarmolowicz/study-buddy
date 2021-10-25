@@ -12,6 +12,14 @@ import {
 import { useFindStudentsQuery } from "store/api/students";
 import { IStudent } from "components/molecules/StudentDetails/Student.Details";
 
+export interface ISerachResults {
+	isVisible: boolean;
+}
+
+export interface ISearchResultItem {
+	isHighlighted: boolean;
+}
+
 export const SearchBar = () => {
 	const [searchPhrase, setSearchPhrase] = useState("");
 	const { data, isLoading } = useFindStudentsQuery({ searchPhrase });
