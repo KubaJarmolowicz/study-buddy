@@ -1,22 +1,29 @@
 import React from "react";
 import PropTypes from "prop-types";
-import DeleteButton from "components/atoms/DeleteButton/DeleteButton";
 import { StyledAverage, StyledInfo, Wrapper } from "./StudentsListItem.styles";
 import { UserShape } from "types";
 
+interface IUserData {
+	average: number;
+	name: string;
+	attendance: number;
+}
+
+export interface IListItemProps {
+	userData: IUserData;
+	handleOpenStudentDetails: React.MouseEventHandler;
+}
+
 const StudentsListItem = ({
-	userData: { average, name, attendance = "0%" },
-	...props
-}) => {
+	userData: { average, name, attendance },
+	handleOpenStudentDetails,
+}: IListItemProps) => {
 	return (
-		<Wrapper {...props}>
+		<Wrapper onClick={handleOpenStudentDetails}>
 			<StyledAverage value={average}>{average}</StyledAverage>
 			<StyledInfo>
-				<p>
-					{name}
-					<DeleteButton />
-				</p>
-				<p>attendance: {attendance}</p>
+				<p>{name}</p>
+				<p>attendance: {attendance}%</p>
 			</StyledInfo>
 		</Wrapper>
 	);

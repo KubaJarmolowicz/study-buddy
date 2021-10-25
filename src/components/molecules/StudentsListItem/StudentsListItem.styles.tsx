@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+interface IAverageProps {
+	value: number;
+}
+
 export const Wrapper = styled.li`
 	display: flex;
 	align-items: center;
@@ -19,7 +23,7 @@ export const Wrapper = styled.li`
 	}
 `;
 
-export const StyledAverage = styled.div`
+export const StyledAverage = styled.div<IAverageProps>`
 	width: 35px;
 	height: 35px;
 	border-radius: 50px;

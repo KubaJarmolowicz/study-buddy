@@ -1,4 +1,6 @@
-export const theme = {
+import { DefaultTheme } from "styled-components";
+
+export const theme: DefaultTheme = {
 	colors: {
 		white: "#FFFFFF",
 		lightGrey: "#F7F8FA",

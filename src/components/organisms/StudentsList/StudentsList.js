@@ -18,7 +18,9 @@ const StudentsList = ({ handleGetCurrentStudentId }) => {
 				) : (
 					data.students.map(userData => (
 						<StudentsListItem
-							onClick={() => handleGetCurrentStudentId(userData.id)}
+							handleOpenStudentDetails={() =>
+								handleGetCurrentStudentId(userData.id)
+							}
 							key={userData.name}
 							userData={userData}
 						/>

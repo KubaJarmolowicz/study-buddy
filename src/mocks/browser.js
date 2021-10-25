@@ -5,6 +5,12 @@ import { db } from "mocks/db";
 export const worker = setupWorker(...handlers);
 
 const seed = () => {
+	const grades = [
+		db.grade.create({ subject: "Business Philosophy" }),
+		db.grade.create({ subject: "Marketing" }),
+		db.grade.create({ subject: "Modern Economy" }),
+	];
+
 	db.group.create({
 		id: "A",
 	});
@@ -21,7 +27,7 @@ const seed = () => {
 	db.note.create();
 
 	for (let i = 0; i < 15; i++) {
-		db.student.create();
+		db.student.create({ grades });
 		db.event.create();
 	}
 };

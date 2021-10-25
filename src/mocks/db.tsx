@@ -1,11 +1,11 @@
-import { factory, primaryKey } from "@mswjs/data";
+import { factory, manyOf, primaryKey } from "@mswjs/data";
 import faker from "faker";
 
 faker.seed(123);
 
 const groups = ["A", "B", "C"];
 const eventTypes = ["workshop", "exam", "lecture"];
-const getRandomValue = (array, index) => array[index];
+const getRandomValue = (array: any[], index: number) => array[index];
 const getRandomAverage = () =>
 	faker.datatype.number({ min: 2, max: 5, precision: 0.1 });
 
@@ -18,20 +18,7 @@ export const db = factory({
 		group: () =>
 			getRandomValue(groups, faker.datatype.number({ min: 0, max: 2 })),
 		course: () => faker.fake("{{company.bsAdjective}} {{company.bsNoun}}"),
-		grades: () => [
-			{
-				subject: "Business Philosophy",
-				average: getRandomAverage(),
-			},
-			{
-				subject: "Marketing",
-				average: getRandomAverage(),
-			},
-			{
-				subject: "Modern Economy",
-				average: getRandomAverage(),
-			},
-		],
+		grades: manyOf("grade"),
 	},
 	group: {
 		id: primaryKey(String),
@@ -55,5 +42,10 @@ export const db = factory({
 		id: primaryKey(faker.datatype.uuid),
 		title: () => "Lorem ipsum dolor sit amet",
 		content: () => "Lorem ipsum dolor sit amet",
+	},
+	grade: {
+		id: primaryKey(faker.datatype.uuid),
+		subject: String,
+		average: () => getRandomAverage(),
 	},
 });

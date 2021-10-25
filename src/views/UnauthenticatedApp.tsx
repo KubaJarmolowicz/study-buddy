@@ -16,11 +16,16 @@ const UnauthenticatedApp = () => {
 
 	return (
 		<FormWrapper onSubmit={handleSubmit(signIn)}>
-			<FormField label="login" name="login" id="login" {...register("login")} />
+			<FormField
+				label="login"
+				//name="login"
+				id="login"
+				{...register("login")}
+			/>
 			{errors.login && <span>Login is required.</span>}
 			<FormField
 				label="password"
-				name="password"
+				//name="password"
 				id="password"
 				type="password"
 				{...register("password")}

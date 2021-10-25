@@ -1,12 +1,13 @@
-import FormField from "./FormField";
+import FormField, { IFormFieldProps } from "./FormField";
+import { Story, Meta } from "@storybook/react/types-6-0";
 
 export default {
 	title: "Components/Molecules/FormField",
 	component: FormField,
 	argTypes: { label: { control: "text", defaultValue: "Login" } },
-};
+} as Meta;
 
-const Template = args => <FormField {...args} />;
+const Template: Story<IFormFieldProps> = args => <FormField {...args} />;
 
 export const Default = Template.bind({});
 

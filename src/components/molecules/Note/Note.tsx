@@ -6,7 +6,17 @@ import {
 } from "components/molecules/Note/Note.styles";
 import { useRemoveNoteMutation } from "store/api/notes";
 
-const Note = ({ title = "Untitled", content = "No content", id }) => {
+interface INoteProps {
+	id: string;
+	title?: string;
+	content?: string;
+}
+
+const Note = ({
+	title = "Untitled",
+	content = "No content",
+	id,
+}: INoteProps) => {
 	const [removeNote, removeRest] = useRemoveNoteMutation();
 
 	const handleRemoveNote = () => removeNote({ id });
