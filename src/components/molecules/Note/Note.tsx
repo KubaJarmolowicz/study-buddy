@@ -6,7 +6,7 @@ import {
 } from "components/molecules/Note/Note.styles";
 import { useRemoveNoteMutation } from "store/api/notes";
 
-interface INoteProps {
+export interface INoteProps {
 	id: string;
 	title?: string;
 	content?: string;

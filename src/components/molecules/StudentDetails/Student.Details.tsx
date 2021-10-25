@@ -17,7 +17,7 @@ interface IGrades {
 	average: number;
 }
 
-interface IStudent {
+export interface IStudent {
 	id: string;
 	name: string;
 	attendance: string;

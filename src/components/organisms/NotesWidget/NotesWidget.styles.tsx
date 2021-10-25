@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import { IWidgetWrapper } from "./NotesWidget";
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.div<IWidgetWrapper>`
 	width: 400px;
 	height: auto;
 	transform: ${({ isOpen }) =>

@@ -1,12 +1,21 @@
-import React, { useCallback, useContext, useState } from "react";
+import React, { ReactNode, useCallback, useContext, useState } from "react";
 
-const ErrorContext = React.createContext({
+interface IErrorContext {
+	error: string | undefined;
+	dispatchError: (message?: string) => void;
+}
+
+const ErrorContext = React.createContext<IErrorContext>({
 	error: "",
 	dispatchError: () => {},
 });
 
-export const ErrorProvider = ({ children }) => {
-	const [error, setError] = useState(null);
+interface ErrorProviderProps {
+	children: ReactNode;
+}
+
+export const ErrorProvider = ({ children }: ErrorProviderProps) => {
+	const [error, setError] = useState<string | undefined>(undefined);
 
 	const dispatchError = useCallback(message => {
 		setError(message);

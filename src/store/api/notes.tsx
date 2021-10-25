@@ -1,4 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { INoteProps } from "components/molecules/Note/Note";
+
+interface Notes {
+	notes: INoteProps[];
+}
 
 export const notesApi = createApi({
 	reducerPath: "notesApi",
@@ -7,7 +12,7 @@ export const notesApi = createApi({
 	}),
 	tagTypes: ["Notes"],
 	endpoints: builder => ({
-		getNotes: builder.query({
+		getNotes: builder.query<Notes, object>({
 			query: () => "notes",
 			providesTags: ["Notes"],
 		}),

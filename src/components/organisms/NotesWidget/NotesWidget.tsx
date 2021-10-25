@@ -7,11 +7,15 @@ import {
 } from "components/organisms/NotesWidget/NotesWidget.styles";
 import { useGetNotesQuery } from "store/api/notes";
 
+export interface IWidgetWrapper {
+	isOpen: boolean;
+}
+
 const NotesWidget = () => {
-	const [isOpen, setIsOpen] = useState(false);
+	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const handleToggleWidget = () => setIsOpen(prevState => !prevState);
 
-	const { data, isLoading } = useGetNotesQuery();
+	const { data, isLoading } = useGetNotesQuery({});
 
 	return (
 		<Wrapper isOpen={isOpen}>
@@ -20,8 +24,8 @@ const NotesWidget = () => {
 				<h2>Loading...</h2>
 			) : (
 				<NotesWrapper>
-					{data.notes.length ? (
-						data.notes.map(({ title, content, id }) => (
+					{data?.notes.length ? (
+						data?.notes.map(({ title, content, id }) => (
 							<Note id={id} key={id} title={title} content={content} />
 						))
 					) : (

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Redirect, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import StudentsList from "components/organisms/StudentsList/StudentsList";

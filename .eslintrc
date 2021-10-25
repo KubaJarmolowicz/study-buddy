@@ -9,5 +9,5 @@
 
 	"plugins": ["storybook"],
 
-	"parser": "babel-eslint"
+	"parser": "@typescript-eslint/parser"
 }
