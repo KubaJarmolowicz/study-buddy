@@ -2,7 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import { StyledResultList } from "./ResultList.styles";
 
-const ResultList = ({ items = [] }) => {
+export interface IResultList {
+	items: string[];
+}
+
+const ResultList = ({ items = [] }: IResultList) => {
 	return (
 		<StyledResultList items={items}>
 			{items.map(item => (

@@ -1,7 +1,7 @@
 import { Input } from "components/atoms/Input/Input";
 import React, { useState } from "react";
 import debounce from "lodash/debounce";
-import { useCombobox } from "downshift";
+import { useCombobox, UseComboboxStateChange } from "downshift";
 import {
 	SearchBarWrapper,
 	SearchResults,
@@ -10,15 +10,19 @@ import {
 	SearchResultsItem,
 } from "components/organisms/SerachBar/SearchBar.styles";
 import { useFindStudentsQuery } from "store/api/students";
+import { IStudent } from "components/molecules/StudentDetails/Student.Details";
 
 export const SearchBar = () => {
 	const [searchPhrase, setSearchPhrase] = useState("");
 	const { data, isLoading } = useFindStudentsQuery({ searchPhrase });
 
-	const [selectedStudent, setSelectedStudent] = useState(null);
+	const [selectedStudentName, setSelectedStudentName] = useState<
+		string | null | undefined
+	>(null);
 
-	const handleSelectedItemChange = ({ selectedItem }) =>
-		setSelectedStudent(selectedItem);
+	const handleSelectedItemChange = ({
+		selectedItem,
+	}: UseComboboxStateChange<string>) => setSelectedStudentName(selectedItem);
 
 	const getMatchingStudents = debounce(({ inputValue }) => {
 		setSearchPhrase(inputValue);
@@ -32,11 +36,10 @@ export const SearchBar = () => {
 		getInputProps,
 		getComboboxProps,
 		highlightedIndex,
-		selectedItem,
 		getItemProps,
 	} = useCombobox({
-		items: data?.students ?? [],
-		selectedItem: selectedStudent?.name ?? "",
+		items: data?.students.map((student: IStudent) => student.name) ?? [],
+		selectedItem: selectedStudentName,
 		onSelectedItemChange: handleSelectedItemChange,
 		onInputValueChange: getMatchingStudents,
 	});
@@ -62,11 +65,10 @@ export const SearchBar = () => {
 					data-testid="search-results"
 				>
 					{isOpen &&
-						data?.students.map((item, index) => (
+						data?.students.map((item: IStudent, index: number) => (
 							<SearchResultsItem
 								isHighlighted={highlightedIndex === index}
-								{...getItemProps({ item, index })}
-								selectedItem={selectedItem}
+								{...getItemProps({ item: item.name, index })}
 								key={item.id}
 							>
 								{item.name}

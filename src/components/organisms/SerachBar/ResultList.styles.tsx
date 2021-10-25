@@ -1,12 +1,13 @@
 import styled from "styled-components";
+import { IResultList } from "./ResultList";
 
-export const StyledResultList = styled.ul`
+export const StyledResultList = styled.ul<IResultList>`
 	display: ${({ items }) => (items.length > 0 ? "block" : "none")};
 	max-width: 600px;
 	width: 100%;
 	position: absolute;
 	left: 0;
-	bottom: ${({ items }) => `${-100 * items.lenght}px`};
+	bottom: ${({ items }) => `${-100 * items.length}px`};
 	transform: translateY(-17px);
 	padding: 0;
 	border-bottom-left-radius: 15px;
