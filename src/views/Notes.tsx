@@ -9,9 +9,17 @@ import {
 } from "views/Notes.styles";
 import { useForm } from "react-hook-form";
 import { useGetNotesQuery, useAddNoteMutation } from "store/api/notes";
+import { INote } from "components/molecules/Note/Note";
+import { IFormFieldProps } from "components/molecules/FormField/FormField";
+
+type NewNote = Omit<INote, "id">;
+
+export interface NotesTextArea extends IFormFieldProps {
+	isTextArea?: boolean;
+}
 
 const Notes = () => {
-	const handleAddNote = ({ title, content }) => {
+	const handleAddNote = ({ title, content }: NewNote) => {
 		addNote({ title, content });
 		reset();
 	};
@@ -26,25 +34,19 @@ const Notes = () => {
 	const { data, isLoading } = useGetNotesQuery();
 	const [addNote, addRest] = useAddNoteMutation();
 
-	React.useEffect(() => {
-		console.log(data);
-	}, [data]);
-
 	return (
 		<Wrapper>
 			<FormWrapper>
 				<form onSubmit={handleSubmit(handleAddNote)}>
 					<StyledFormField
 						label="Title"
-						name="title"
 						id="title"
 						{...register("title", { required: true })}
 					/>
 					{errors.title && <div>Title is required.</div>}
 					<StyledFormField
-						isTextarea
+						isTextArea
 						label="Content"
-						name="content"
 						id="content"
 						{...register("content", { required: true })}
 					/>
@@ -56,8 +58,8 @@ const Notes = () => {
 				<h2>Loading...</h2>
 			) : (
 				<NotesWrapper>
-					{data.notes.length ? (
-						data.notes.map(({ title, content, id }) => (
+					{data?.notes.length ? (
+						data?.notes.map(({ title, content, id }) => (
 							<Note id={id} key={id} title={title} content={content} />
 						))
 					) : (

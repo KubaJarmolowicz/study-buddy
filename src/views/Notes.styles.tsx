@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import FormField from "components/molecules/FormField/FormField";
+import { NotesTextArea } from "./Notes";
 
 export const Wrapper = styled.div`
 	width: 100%;
@@ -22,8 +23,8 @@ export const FormWrapper = styled.div`
 	align-items: flex-start;
 `;
 
-export const StyledFormField = styled(FormField)`
-	height: ${({ isTextarea }) => (isTextarea ? "300px" : "unset")};
+export const StyledFormField = styled(FormField)<NotesTextArea>`
+	height: ${({ isTextArea }) => (isTextArea ? "300px" : "unset")};
 `;
 
 export const NotesWrapper = styled.div`

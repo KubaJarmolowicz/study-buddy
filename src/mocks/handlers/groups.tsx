@@ -1,10 +1,7 @@
 import { DefaultRequestBody, rest } from "msw";
 import { db } from "mocks/db";
 import { IStudent } from "components/molecules/StudentDetails/Student.Details";
-
-interface IGroup {
-	id: string;
-}
+import { IGroup } from "store/api/groups";
 
 interface MultiGroupResponse {
 	groups: IGroup[];

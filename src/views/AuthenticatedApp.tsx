@@ -1,4 +1,3 @@
-import React from "react";
 import MainTemplate from "components/templates/MainTemplate/MainTemplate";
 import { Wrapper } from "./Root.styles";
 import { Redirect, Route, Switch } from "react-router";

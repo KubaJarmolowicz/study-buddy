@@ -9,9 +9,10 @@ import StudentDetails from "components/molecules/StudentDetails/Student.Details"
 import Modal from "components/organisms/Modal/Modal";
 import { useGetGroupsQuery } from "store/api/groups";
 import { useGetStudentByIdQuery } from "store/api/students";
+import { IParams } from "components/organisms/StudentsList/StudentsList";
 
 const Dashboard = () => {
-	const { id } = useParams();
+	const { id } = useParams<IParams>();
 
 	const [currentStudentId, setCurrentStudentId] = useState(
 		"318e2aeb-f079-4488-a42c-b158be8365ed"
@@ -24,7 +25,7 @@ const Dashboard = () => {
 		isLoading: isStudentLoading,
 	} = useGetStudentByIdQuery(currentStudentId);
 
-	const handleGetCurrentStudentId = id => {
+	const handleGetCurrentStudentId = (id: string) => {
 		setCurrentStudentId(id);
 		handleOpenModal();
 	};
@@ -37,15 +38,14 @@ const Dashboard = () => {
 		);
 	}
 
-	if (!id && data.groups.length > 0)
-		return <Redirect to={`/group/${data.groups[0].id}`} />;
+	if (!id) return <Redirect to={`/group/${data?.groups[0].id}`} />;
 
 	return (
 		<Wrapper>
 			<TitleWrapper>
 				<Title as="h2">Group {id}</Title>
 				<nav>
-					{data.groups.map(({ id }) => (
+					{data?.groups.map(({ id }) => (
 						<Link key={id} to={`/group/${id}`}>
 							{id}{" "}
 						</Link>
@@ -55,7 +55,7 @@ const Dashboard = () => {
 			<GroupWrapper>
 				<StudentsList handleGetCurrentStudentId={handleGetCurrentStudentId} />
 				<Modal isOpen={isModalOpen} handleClose={handleCloseModal}>
-					{isStudentLoading ? (
+					{isStudentLoading || !studentsData ? (
 						<h2>Loading...</h2>
 					) : (
 						<StudentDetails student={studentsData?.students} />

@@ -17,7 +17,7 @@ describe("Root component", () => {
 		fireEvent.change(login, { target: { value: "a@b.com" } });
 		fireEvent.change(password, { target: { value: "1234" } });
 
-		fireEvent.click(screen.queryByText("Sign in"));
+		fireEvent.click(screen.queryByText("Sign in") as HTMLElement);
 
 		await waitFor(() => screen.getByText(/Oops!/));
 	});
@@ -30,7 +30,7 @@ describe("Root component", () => {
 		fireEvent.change(login, { target: { value: "a@a.com" } });
 		fireEvent.change(password, { target: { value: "123" } });
 
-		fireEvent.click(screen.queryByText("Sign in"));
+		fireEvent.click(screen.queryByText("Sign in") as HTMLElement);
 
 		await waitFor(() => screen.getByText(/Logout/));
 	});
@@ -43,7 +43,7 @@ describe("Root component", () => {
 		fireEvent.change(login, { target: { value: "a@a.com" } });
 		fireEvent.change(password, { target: { value: "123" } });
 
-		fireEvent.click(screen.queryByText("Sign in"));
+		fireEvent.click(screen.queryByText("Sign in") as HTMLElement);
 
 		await waitFor(() => screen.getByText(/Logout/));
 

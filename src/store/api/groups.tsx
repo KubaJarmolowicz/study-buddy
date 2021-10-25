@@ -1,5 +1,13 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
+export interface IGroup {
+	id: string;
+}
+
+interface Groups {
+	groups: IGroup[];
+}
+
 export const groupsApi = createApi({
 	reducerPath: "groupsApi",
 	baseQuery: fetchBaseQuery({
@@ -7,7 +15,7 @@ export const groupsApi = createApi({
 	}),
 	tagTypes: ["Groups"],
 	endpoints: builder => ({
-		getGroups: builder.query({
+		getGroups: builder.query<Groups, void>({
 			query: () => "groups",
 			providesTags: ["Groups"],
 		}),

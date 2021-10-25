@@ -9,7 +9,7 @@ interface IStudentsListProps {
 	handleGetCurrentStudentId: (id: string) => void;
 }
 
-interface IParams {
+export interface IParams {
 	id: string;
 }
 

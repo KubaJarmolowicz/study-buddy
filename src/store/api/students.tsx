@@ -4,6 +4,10 @@ interface Students {
 	students: IStudent[];
 }
 
+interface FetchedStudent {
+	students: IStudent;
+}
+
 interface ISearchQuery {
 	searchPhrase: string;
 }
@@ -24,7 +28,7 @@ export const studentsApi = createApi({
 	}),
 	tagTypes: ["Students"],
 	endpoints: builder => ({
-		getStudentById: builder.query<IStudent, string>({
+		getStudentById: builder.query<FetchedStudent, string>({
 			query: id => ({
 				url: `students/${id}`,
 			}),
