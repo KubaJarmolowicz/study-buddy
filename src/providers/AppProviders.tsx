@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactChild } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import { AuthProvider } from "../hooks/useAuth";
 import { ErrorProvider } from "../hooks/useError";
@@ -8,7 +8,11 @@ import { theme } from "assets/styles/theme";
 import { Provider } from "react-redux";
 import { store } from "store";
 
-const AppProviders = ({ children }) => {
+interface IProviders {
+	children: ReactChild;
+}
+
+const AppProviders = ({ children }: IProviders) => {
 	return (
 		<Provider store={store}>
 			<Router>

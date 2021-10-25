@@ -8,10 +8,10 @@ import AppProviders from "providers/AppProviders";
 worker.start();
 
 ReactDOM.render(
-  <React.StrictMode>
-    <AppProviders>
-      <Root />
-    </AppProviders>
-  </React.StrictMode>,
-  document.getElementById("root")
+	<React.StrictMode>
+		<AppProviders>
+			<Root />
+		</AppProviders>
+	</React.StrictMode>,
+	document.getElementById("root")
 );
