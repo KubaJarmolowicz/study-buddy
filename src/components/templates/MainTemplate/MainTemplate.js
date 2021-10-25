@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Navigation from "components/organisms/Navigation/Navigation";
 import { Wrapper } from "components/templates/MainTemplate/MainTemplate.styles";
 import { SearchBar } from "components/organisms/SerachBar/SearchBar";

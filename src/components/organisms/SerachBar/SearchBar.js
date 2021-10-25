@@ -41,10 +41,6 @@ export const SearchBar = () => {
 		onInputValueChange: getMatchingStudents,
 	});
 
-	// React.useEffect(() => {
-	// 	console.log(selectedItem);
-	// }, [selectedItem]);
-
 	return (
 		<SearchBarWrapper {...getComboboxProps()}>
 			<StatusInfo>
