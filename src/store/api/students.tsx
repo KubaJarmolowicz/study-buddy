@@ -1,4 +1,12 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { IStudent } from "components/molecules/StudentDetails/Student.Details";
+interface Students {
+	students: IStudent[];
+}
+
+interface ISearchQuery {
+	searchPhrase: string;
+}
 
 export const studentsApi = createApi({
 	reducerPath: "studentsApi",
@@ -16,26 +24,25 @@ export const studentsApi = createApi({
 	}),
 	tagTypes: ["Students"],
 	endpoints: builder => ({
-		getStudentById: builder.query({
+		getStudentById: builder.query<IStudent, string>({
 			query: id => ({
 				url: `students/${id}`,
 			}),
 			providesTags: ["Students"],
 		}),
 
-		getStudentsByGroup: builder.query({
+		getStudentsByGroup: builder.query<Students, string>({
 			query: groupId => ({
 				url: `groups/${groupId}`,
 			}),
 			providesTags: ["Students"],
 		}),
-		findStudents: builder.query({
+		findStudents: builder.query<Students, ISearchQuery>({
 			query: body => ({
 				url: "students/search",
 				method: "POST",
 				body,
 			}),
-			invalidatesTags: ["Students"],
 		}),
 	}),
 });

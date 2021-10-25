@@ -12,5 +12,6 @@ export const store = configureStore({
 	middleware: getDefaultMiddleware =>
 		getDefaultMiddleware()
 			.concat(notesApi.middleware)
+			.concat(groupsApi.middleware)
 			.concat(studentsApi.middleware),
 });

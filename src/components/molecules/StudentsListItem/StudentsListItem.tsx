@@ -1,16 +1,9 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { StyledAverage, StyledInfo, Wrapper } from "./StudentsListItem.styles";
-import { UserShape } from "types";
-
-interface IUserData {
-	average: number;
-	name: string;
-	attendance: number;
-}
+import { IStudent } from "../StudentDetails/Student.Details";
 
 export interface IListItemProps {
-	userData: IUserData;
+	userData: IStudent;
 	handleOpenStudentDetails: React.MouseEventHandler;
 }
 
@@ -27,10 +20,6 @@ const StudentsListItem = ({
 			</StyledInfo>
 		</Wrapper>
 	);
-};
-
-StudentsListItem.propTypes = {
-	userData: PropTypes.shape(UserShape),
 };
 
 export default StudentsListItem;

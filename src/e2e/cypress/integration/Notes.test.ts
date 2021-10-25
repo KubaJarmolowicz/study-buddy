@@ -24,8 +24,6 @@ describe("Notes View", () => {
 
 		cy.findAllByText(/morda/i).should("exist");
 
-		//cy.findAllByLabelText(/delete/i).should("exist");
-
 		cy.findAllByText(/morda/i)
 			.first()
 			.parent()

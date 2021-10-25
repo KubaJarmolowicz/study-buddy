@@ -15,7 +15,7 @@ const NotesWidget = () => {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const handleToggleWidget = () => setIsOpen(prevState => !prevState);
 
-	const { data, isLoading } = useGetNotesQuery({});
+	const { data, isLoading } = useGetNotesQuery();
 
 	return (
 		<Wrapper isOpen={isOpen}>

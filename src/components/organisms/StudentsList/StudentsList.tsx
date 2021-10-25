@@ -5,8 +5,16 @@ import { StyledList } from "./StudentsList.styles";
 import { Title } from "components/atoms/Title/Title";
 import { useGetStudentsByGroupQuery } from "store/api/students";
 
-const StudentsList = ({ handleGetCurrentStudentId }) => {
-	const { id } = useParams();
+interface IStudentsListProps {
+	handleGetCurrentStudentId: (id: string) => void;
+}
+
+interface IParams {
+	id: string;
+}
+
+const StudentsList = ({ handleGetCurrentStudentId }: IStudentsListProps) => {
+	const { id } = useParams<IParams>();
 	const { data, isLoading } = useGetStudentsByGroupQuery(id);
 
 	return (
@@ -16,7 +24,7 @@ const StudentsList = ({ handleGetCurrentStudentId }) => {
 				{isLoading ? (
 					<h2>Loading...</h2>
 				) : (
-					data.students.map(userData => (
+					data?.students.map(userData => (
 						<StudentsListItem
 							handleOpenStudentDetails={() =>
 								handleGetCurrentStudentId(userData.id)

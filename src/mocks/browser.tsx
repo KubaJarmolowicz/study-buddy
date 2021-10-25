@@ -34,9 +34,9 @@ const seed = () => {
 
 seed();
 
-window.mocks = {
-	seed,
-	getStudents: () => db.student.getAll(),
-	getEvents: () => db.event.getAll(),
-	getGroups: () => db.group.getAll(),
-};
+// window.mocks = {
+// 	seed,
+// 	getStudents: () => db.student.getAll(),
+// 	getEvents: () => db.event.getAll(),
+// 	getGroups: () => db.group.getAll(),
+// };

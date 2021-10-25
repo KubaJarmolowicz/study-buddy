@@ -68,7 +68,7 @@ export const SearchBar = () => {
 					placeholder="Search"
 				/>
 				<SearchResults
-					isVisible={!isLoading && isOpen && data?.students.length > 0}
+					isVisible={!isLoading && isOpen}
 					{...getMenuProps()}
 					data-testid="search-results"
 				>
@@ -79,6 +79,7 @@ export const SearchBar = () => {
 								{...getItemProps({ item: item.name, index })}
 								key={item.id}
 							>
+								{console.log(item)}
 								{item.name}
 							</SearchResultsItem>
 						))}

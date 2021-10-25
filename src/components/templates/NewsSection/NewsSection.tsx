@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
 import { Wrapper, NewsSectionHeader } from "./NewsSection.styles";
 import {
 	ArticleWrapper,
@@ -25,8 +24,19 @@ export const query = `{
   }
 }`;
 
+interface IArticle {
+	id: string;
+	title: string;
+	category: string;
+	content: string;
+	image: {
+		url: string;
+		alt: string;
+	};
+}
+
 const NewsSection = () => {
-	const [articles, setArticles] = useState([]);
+	const [articles, setArticles] = useState<IArticle[]>([]);
 	const { error, dispatchError } = useError();
 
 	useEffect(() => {
