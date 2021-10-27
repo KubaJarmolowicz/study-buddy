@@ -1,5 +1,6 @@
 import { factory, manyOf, primaryKey } from "@mswjs/data";
 import faker from "faker";
+import { Group } from "store/api/groups";
 
 faker.seed(123);
 
@@ -8,6 +9,18 @@ const eventTypes = ["workshop", "exam", "lecture"];
 const getRandomValue = (array: any[], index: number) => array[index];
 const getRandomAverage = () =>
 	faker.datatype.number({ min: 2, max: 5, precision: 0.1 });
+
+const getAllowedGroup = () => {
+	let createdGroupsCounter = 0;
+
+	return () => {
+		const resovledGroup = Group[createdGroupsCounter] ?? Group[0];
+
+		createdGroupsCounter++;
+
+		return resovledGroup;
+	};
+};
 
 export const db = factory({
 	student: {
@@ -21,7 +34,7 @@ export const db = factory({
 		grades: manyOf("grade"),
 	},
 	group: {
-		id: primaryKey(String),
+		id: primaryKey(getAllowedGroup()),
 	},
 	event: {
 		id: primaryKey(faker.datatype.uuid),

@@ -1,7 +1,13 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
+export enum Group {
+	A,
+	B,
+	C,
+}
+
 export interface IGroup {
-	id: string;
+	id: typeof Group[0];
 }
 
 interface Groups {

@@ -1,6 +1,7 @@
 import { setupWorker } from "msw";
 import { handlers } from "mocks/handlers";
 import { db } from "mocks/db";
+import { Group } from "store/api/groups";
 
 export const worker = setupWorker(...handlers);
 
@@ -12,13 +13,13 @@ const seed = () => {
 	];
 
 	db.group.create({
-		id: "A",
+		id: Group[0],
 	});
 	db.group.create({
-		id: "B",
+		id: Group[1],
 	});
 	db.group.create({
-		id: "C",
+		id: Group[2],
 	});
 
 	db.teacher.create();
